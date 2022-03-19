@@ -38,6 +38,11 @@ async def commands_start(message : types.Message):
 
 @dp.message_handler(Text(equals="Правда😜"))
 async def Trueth_Command(message : types.Message):
+	global index_user
+	count=await sqlite_db.sql_read(message,index_user)
+	index_user+=1
+	if(index_user>=count):
+		index_user=0
 	digit=GetRandDigit(0,len(list_questions))
 	question_cash=list()
 	if CheckRepeats(list_questions[digit],question_cash):
@@ -52,6 +57,11 @@ async def Trueth_Command(message : types.Message):
 
 @dp.message_handler(Text(equals="Действие😉"))
 async def Do_Command(message : types.Message):
+	global index_user
+	count=await sqlite_db.sql_read(message,index_user)
+	index_user+=1
+	if(index_user>=count):
+		index_user=0
 	digit=GetRandDigit(0,len(list_case))
 	cash=list()
 	if CheckRepeats(list_case[digit],cash):
